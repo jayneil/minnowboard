@@ -1,0 +1,289 @@
+MinnowBoard Guide: Physical Computing with the MinnowBoard
+
+Jayneil Dalal(jayneil.dalal@gmail.com)
+
+
+
+Summary
+
+In this guide, I will describe how to do Physical Computing with the MinnowBoard step by step. This guide targets beginners who are just getting started on the MinnowBoard. 
+
+
+
+Contents of the box
+
+When you purchase a MinnowBoard, you get the following items in the box as shown in Figure -1:
+
+1. MinnowBoard
+
+2. 5V Power Connector
+
+3. 4GB microSD card preloaded with Angstrom Distribution(Yocto Project compatible)
+
+ Figure-1: Box contents
+
+
+
+Specifications
+
+For detailed specifications of the MinnowBoard, please visit the link below:
+
+http://www.minnowboard.org/technical-features/
+
+
+
+Anatomy of a MinnowBoard
+
+This section briefly describes the various different components on the MinnowBoard. Figure -2 below annotates the different components on the top side of the MinnowBoard.
+
+ Figure-2: MinnowBoard top side
+
+Figure -3 below annotates the different components on the bottom side of the MinnowBoard.
+
+ Figure-3: MinnowBoard bottom side 
+
+
+
+Preparing the MicroSD Card
+
+Note:- This section is for linux users only. If you are using Windows, please skip to the [sec:Windows-Users]
+
+Please note that this section is completely optional. The MinnowBoard already comes with a microSD card that is preloaded with a working Angstrom image. In any case should you want a newer image or want to program the microSD card again, this section covers it all. For the purpose of this guide, I have used an Ubuntu 12.10 64 bit system.
+
+• First download the latest Angstrom image for MinnowBoard from the link below:
+
+http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz
+
+At the time of writing this guide, the latest image available for download was 'Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz' 
+
+• Now, identify the correct raw device name (like /dev/sde - not /dev/sde1) for the SD card. You can do this by opening disk utility in Ubuntu and clicking on the microSD card. 
+
+• Now unpack the image to the microSD card by writing the following command in the terminal:
+
+$ xz -dkc Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz > /dev/sdX
+
+Here 'sdX' stands for the device id of the microSD card.
+
+
+
+GPIO on the MinnowBoard
+
+The MinnowBoard provides a variety of GPIO(General Purpose Input Output), some with a dedicated purpose. For the purpose of this guide, I will be concentrating only on GPIO(s) which are on the J9 expansion header as shown in Figure - 4 . Please refer the table below to find out how are the GPIO(s) actually referenced in the kernel and their default modes as well as values. Unless otherwise stated the GPIO(s) on J9 expansion header are rated at 3.3V and can source/sink a maximum of 10mA. Also, it can be seen from the table that the GPIO(s) are by default set to be used in INPUT mode and have PULL-UP resistors enabled.
+
+ Figure-4: GPIO on the MinnowBoard
+
+As you can see from Figure -4, there are a total of ten pins on the J9 header out of which 8 pins can be used as GPIO. The remaining two pins are GND and 3.3V as mentioned in the table. 
+
+The GPIO(s) are accessible via the user space in Linux at the location below on the filesystem:
+
+/sys/class/gpio
+
+There is one directory per GPIO, named as shown below(as an example only two GPIO(s) are shown here): 
+
+/sys/class/gpio/gpio245
+
+Inside each one of those directories, there are files named "direction” and “value” as shown in Figure - 5. The former is for configuring the mode of GPIO as input(“in”) or output(“out”) while the latter is for the value('1' for HIGH and '0' for LOW) if used in output mode. 
+
+ Figure-5: GPIO attributes
+
+
+
+Pullup/Pulldown Resistors
+
+Concept:
+
+So, you want to use the GPIO on the beaglebone to read values externally connected devices(e.g. push button). The particular GPIO pin is set to be used in input mode. Now, think about the case when no input is being provided to that pin(lets say P2) as shown in Figure - 6 below. This is called a 'floating point' condition and the processor cannot determine what is the value of the input pin. In this case, even the noise in the environment can influence the pin value and give wrong results. 
+
+ Figure-6: No pullup resistor
+
+Hence, to avoid this condition the pins have a pullup/pull down resistor connected to them to prevent this from happening . Pullup is used to denote that the pin is connected to Vcc(3.3V in this case) via a resistor and pulldown is used to denote the pin that is connected to GND via a resistor. In Figure - 7 below, a 10k ohms pullup resistor is used. The value is high so that when the switch is pressed and the GND is connected to 5V, the current passing through is very less and does not burn the wire or damage the circuit. Beaglebone has internal pullup and pulldown resistors. 
+
+ Figure-7: Pullup resistor connected
+
+
+
+Push button
+
+A pushbutton is a simple switch mechanism which permits user generated changes in the state of a circuit. Pushbutton usually comes with four legs. As seen from the Figure - 9 below, legs are always connected in groups of two. When the pushbutton is pressed all the 4 legs are connected.
+ 
+ Figure-8: Push Button Figure-9: Working of push button
+
+The pushbutton used in this guide can be purchased from here:
+
+[https://www.sparkfun.com/products/97]
+
+
+
+Selecting the correct LED
+
+• To make sure that you do not damage the GPIO pins on the MinnowBoard, please use a LED whose rating should not exceed 3.3V/10mA:
+
+http://www.digikey.com/product-detail/en/HLMP-4700-C0002/516-2483- 2-ND/1234840
+
+• If you have an LED that is higher than the above mentioned ratings, please refer the refer the link below to select an appropriate current limiting resistor:
+
+http://www.cmiyc.com/tutorials/led-basics/
+
+
+
+Physical Computing
+
+Physical computing, in the broadest sense, means building interactive physical systems by the use of software and hardware that can sense and respond to the outside world. In our case we are trying to take input from the surrounding via the push button and accordingly causing some change in the outside world by turning ON the LED when the push button is pressed.
+
+
+
+Extra Credit
+
+This is an optional section which you can read for further understanding. In a nutshell, we are trying to access the on board GPIO(s) via the userspacehttp://elinux.org/images/4/4f/02-linux-quick-start.pdf in Linux. To be more precise we are trying to use the sysfshttp://www.makelinux.net/books/lkd2/ch17lev1sec8 interface. sysfs is a virtual filesystem which enumerates the devices and busses attached to the system(board in our case) into a file system hierarchy that can be accessed from userspace. It's generated by the kernel and always mounted at /sys. The GPIO sysfs interface allows users to manipulate any GPIO from userspace. Since it uses [http://elk.informatik.fh-augsburg.de/rtlabor/gnublin-lpc3131/work_eplpc3131/Dokumente/005_gpio.pdf||gpiolib], it is able to dynamically utilize all GPIOs on the system. The preloaded Angstrom image on the MinnowBoard already has all the GPIO on J9 header exported to the userspace by default.
+
+
+ 
+Setup
+
+Please refer the Figure - 10 below to see the connections:
+
+ Figure-10: Connection Diagram
+
+Only the pins on the J9 expansion header are used in this case. Connect Pin-2(GND) to leg-1 of the push button. Then connect Pin-7(GPIO) to leg-2(which is not connected to the previous leg-1) of the push button. After that connect the cathode of the LED to leg-4(which is connected by default to leg-4) of the push button. Finally, connect the anode of the LED to a 330 ohm resistor and the other end of the resistor to Pin-3(GPIO). You can purchase the male-female type hookup/jumper wires used for connections from the link below:
+
+https://www.sparkfun.com/products/9140
+
+
+
+Booting Angstrom
+
+
+
+• First insert the card into the microSD card slot as shown in Figure -11. 
+
+ Figure-11: Connecting the microSD card
+
+• Next, connect an external keyboard and mouse to the MinnowBoard. Then connect the USB mini cable to your computer and the MinnowBoard as shown in Figure -12
+
+ Figure-12: Connecting the USB mini cable
+
+• To power up the MinnowBoard, connect the 5V/3A power supply rated to it as shown in Figure -13:
+
+ Figure-13: Powering up the MinnowBoard
+
+• Access the MinnowBoard via the terminal:
+
+$ screen /dev/ttyUSB1 115200
+
+Note:- You can also use minicom. But this is just much easier! Also in most cases the virtual USB serial port is ttyUSB1. If it does not work, try ttyUSB0 .
+
+• You should see a similar Angstrom login in screen as shown in Figure - 14. The username is 'root' and there is no password. Just press the enter key.
+
+ Figure-14: Angstrom
+
+Script
+
+#!/bin/bash 
+#Use Pin-3 as output pin 
+echo out > /sys/class/gpio/gpio244/direction
+#Use Pin-7 as input pin 
+echo in > /sys/class/gpio/gpio248/direction
+# Read forever
+while : 
+do 
+# Read value of Pin-7 
+THIS_VALUE=`cat /sys/class/gpio/gpio248/value`
+if [ "$THIS_VALUE" = "0" ] 
+then 
+echo 1 > /sys/class/gpio/gpio244/value 
+else 
+echo 0 > /sys/class/gpio/gpio244/value 
+fi
+done 
+
+In the above script, '#' is used for comments(except for first line). Write the above script in your favorite text editor, save it(make sure to add the '.sh' extension at the end) and place it in on the microSD card before you boot the MinnowBoard. Or you can use a text editor like 'nano' on the MinnowBoard and write the above script. In any case make sure the script is executable by typing the following command in the terminal:
+
+$ chmod a+x <script_name>
+
+
+
+In my case, I named the script 'physicalcomputing.sh'
+
+Steps
+
+• So, now run the script created earlier by typing the following command in the terminal as shown in Figure - 15:
+
+$ ./physicalcomputing.sh
+
+ Figure-15: Running the script
+
+Please see the next page for the output.
+
+You should get an output as shown below:
+
+ Figure-16: Led OFF
+
+ Figure-17: LED ON
+
+
+
+Windows Users
+
+This section is for those who are using a windows machine to interact with the MinnowBoard. 
+
+Serial Terminal
+
+We will be using Teraterm as our terminal application. Please follow the steps below to set up Teraterm:
+
+• Download the latest version of Teraterm from the link below:
+
+http://en.sourceforge.jp/projects/ttssh2/releases/
+
+At the time of writing this guide the latest version was 'teraterm-4.78.exe'
+
+• Install the Teraterm software by double clicking on the exe file downloaded earlier. If it displays a security warning, then accept it and click on 'Run' as shown in Figure - 18 below:
+
+ Figure-18: Teraterm installation
+
+• Then just follow the on-screen instructions to install the software. It is advised to do the 'full' installation instead of the 'standard' one as shown in Figure - 19 below:
+
+ Figure-19: Perform Teraterm full installation
+
+• Launch Teraterm. Then go to Setup>Serial port and change the settings as shown in Figure - 20 below:
+
+ Figure-20: Teraterm Serial Port setup
+
+• Then go to File>New connections and select the Serial option and chose the appropriate COM port as shown in Figure - 21 below
+
+ Figure-21: Setting up a new connection
+
+• Then connect the required accessories as described earlier in the guide and power up the MinnowBoard. If all went well, you should see a successful output in Teraterm as shown in Figure - 22 below:
+
+ Figure-22: Angstrom login
+
+Preparing the MicroSD Card
+
+• First, download the latest Angstrom from the link below:
+
+http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz
+
+• Next, download 7-zip utility from the link below and install it:
+
+http://www.7-zip.org/download.html
+
+• Decompress the previously downloaded Angstrom image using 7-zip as shown in Figure - 23 below. The resulting file should have an extension '.img' .
+
+ Figure-23: Decompressing the image
+
+• Now, install 'Image Writer for Windows' software from the link below:
+
+http://sourceforge.net/projects/win32diskimager/files/latest/download 
+
+• Insert the mircoSD card into the computer using an appropriate connector. Next, launch the image writer software we just installed earlier. Select the Angstrom image and write it to the microSD card as shown in Figure - 24 below.
+
+ Figure-24: Writing the image to microSD card
+
+
+
+Resources
+
+• Please refer the websites below for videos, tutorials, guides, projects etc. on the MinnowBoard:
+
+1. http://www.minnowboard.org/
+
+2. http://www.elinux.org/Minnowboard
