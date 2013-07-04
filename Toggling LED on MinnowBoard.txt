@@ -1,5 +1,5 @@
  
-MinnowBoard Guide: Toggle User LED on MinnowBoard
+MinnowBoard Guide: Toggling a User LED on the MinnowBoard
 
 Jayneil Dalal(jayneil.dalal@gmail.com)
 
@@ -7,19 +7,19 @@ Jayneil Dalal(jayneil.dalal@gmail.com)
 
 Summary
 
-In this guide, I will describe how to toggle an user LED on the MinnowBoard step by step. This guide targets beginners who are just getting started on the MinnowBoard. 
+In this guide, we will toggle a user LED on the MinnowBoard step-by-step. This guide is for beginners who are just getting started with the MinnowBoard. 
 
 
 
-Contents of the box
+Contents of the Box
 
-When you purchase a MinnowBoard, you get the following items in the box as shown in Figure -1:
+When you purchase a MinnowBoard, the following items are included in the box as shown in Figure -1:
 
 1. MinnowBoard
 
-2. 5V Power Connector
+2. 5V Power Adapter
 
-3. 4GB microSD card preloaded with Angstrom Distribution(Yocto Project compatible)
+3. 4GB microSD card preloaded with the Angstrom Linux Distribution (Yocto Project Compatible)
 
  Figure-1: Box contents
 
@@ -27,17 +27,17 @@ When you purchase a MinnowBoard, you get the following items in the box as shown
 
 Specifications
 
-For detailed specifications of the MinnowBoard, please visit the link below:http://www.minnowboard.org/technical-features/
+For detailed specifications of the MinnowBoard, please visit our web site:http://www.minnowboard.org/technical-features/
 
 
 
 Anatomy of a MinnowBoard
 
-This section briefly describes the various different components on the MinnowBoard. Figure -2 below annotates the different components on the top side of the MinnowBoard.
+This section outlines the various components on the MinnowBoard. Figure -2 below annotates the important components on the top side of the MinnowBoard.
 
  Figure-2: MinnowBoard top side
 
-Figure -3 below annotates the different components on the bottom side of the MinnowBoard.
+Figure -3 below annotates the important components on the bottom side of the MinnowBoard.
 
  Figure-3: MinnowBoard bottom side 
 
@@ -45,19 +45,21 @@ Figure -3 below annotates the different components on the bottom side of the Min
 
 Preparing the MicroSD Card
 
-Note:- This section is for linux users only. If you are using Windows, please skip to the [sec:Windows-Users]
+Please note that this section is completely optional. The MinnowBoard already comes with a microSD card that is preloaded with a working Angstrom Linux image. In case you want to use a newer image or want to program the microSD card from scratch, this section covers it all. These steps were created using an Ubuntu 12.10 64-bit system.
 
-Please note that this section is completely optional. The MinnowBoard already comes with a microSD card that is preloaded with a working Angstrom image. In any case should you want a newer image or want to program the microSD card again, this section covers it all. For the purpose of this guide, I have used an Ubuntu 12.10 64 bit system.
+Note:- This section is for Linux users only. If you are using Windows, please skip ahead to the [sec:Windows-Users] section.
 
-• First download the latest Angstrom image for MinnowBoard from the link below:
+• First download the latest Angstrom Linux image for MinnowBoard from the link below:
 
 http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz
 
 At the time of writing this guide, the latest image available for download was 'Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz' 
 
-• Now, identify the correct raw device name (like /dev/sde - not /dev/sde1) for the microSD card. You can do this by opening disk utility in Ubuntu and clicking on the microSD card. 
+• Now, identify the correct raw device name (like /dev/sde - not /dev/sde1) for your microSD card. You can do this by opening the Disk Utility application (sometimes also called Disks) in Ubuntu and clicking on the microSD card entry. See the Device field to determine the raw device name of your microSD card.
 
-• Now unpack the image to the microSD card by writing the following command in the terminal:
+NOTE TO JAYNEIL: On most desktop Linux systems, inserting removable media results in it being mounted automatically. The card they are inserting could have any arbitrary filesystem or partitioning setup already. So we should give some general instructions here on how to unmount the card's partition(s) first. 
+
+• Now unpack the image and write it to the microSD card by typing the following command in a terminal window:
 
 $ xzcat Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz | sudo dcfldd of=/dev/sdc
 
@@ -67,13 +69,25 @@ Here 'sdX' stands for the device id of the microSD card.
 
 User LED on the MinnowBoard
 
-There are a total of five LED(s) on the MinnowBoard namely D11, D12, D13, D14, D15 as shown in Figure -2. Their functions have been described in the table below:
+There are a total of five LEDs on the MinnowBoard - D11, D12, D13, D14, and D15 as shown in Figure -2. Their functions are described in the table below:
 
- Figure-4: LED(s) on the MinnowBoard
+ Figure-4: LEDs on the MinnowBoard
 
-So, there are two USER LED(s) on the MinnowBoard namely D11 and D12 but by default they cannot be used as USER LED(s). 
+NOTE TO JAYNEIL: We should probably explain the meaning of these LEDs more explicitly here, since a user may not know what Heartbeat means, for example. Here are some explanations of the top of my head, but please confirm them with Darren to make sure they are accurate:
 
-The user LED(s) are accessible via the user space in Linux at the location below on the filesystem:
+* Heartbeat - The Heartbeat LED blinks at a regular rate to indicate that the hardware is operating properly, and that the CPU hasn't locked up. This is useful in embedded systems where you may not always have a board connected to a display to confirm its operation.
+
+* microSD Card Activity - This LED blinks when there is disk activity happening on the microSD card port. 
+
+* PWR - Power on indicator LED.
+
+* CPUHOT - When this LED is on, it indicates that the CPU temperature is abnormally high. This may suggest that the MinnowBoard is running in too hot of an environment, or that there is a problem with the CPU heatsink attachment. The MinnowBoard will shut off in the event that the CPU temperature reaches a level that could possibly damage itself, and CPUHOT represents a warning temperature before this state is reached.
+
+* PWROK - This LED indicates that the power source is operating within required tolerances for the MinnowBoard. 
+
+So there are two USER LEDs on the MinnowBoard - D11 and D12 - but by default they cannot be used as USER LEDs. 
+
+The user LEDs are accessible via userspace in Linux at the following filesystem location:
 
 /sys/class/leds
 
@@ -82,13 +96,13 @@ There is one directory per user LED, named as shown below:
 /sys/class/leds/minnow_led0
 /sys/class/leds/minnow_led1
 
-Here, led0 is D11 while led1 is D12. Inside each one of those directories, there is a file named "brightness". If you write a "1" or a "0" to this file, then you can control the status of that led, i.e. , toggle it ON or OFF respectively.
+Here, led0 is D11, while led1 is D12. Inside each one of those directories, there is a file named "brightness". If you write a "1" or a "0" to this file, then you can control the status of that led, i.e. , toggle it ON or OFF respectively.
 
 
 
 Extra Credit
 
-This is an optional section which you can read for further understanding. In a nutshell, we are trying to access the on board USER LED(s) via the userspace[http://elinux.org/images/4/4f/02-linux-quick-start.pdf] in Linux. To be more precise we are trying to use the sysfs[http://www.makelinux.net/books/lkd2/ch17lev1sec8] interface. sysfs is a virtual filesystem which enumerates the devices and busses attached to the system(board in our case) into a file system hierarchy that can be accessed from userspace. It's generated by the kernel and always mounted at /sys. As discussed earlier, trigger for D11 and D12 LED(s) has to be changed to make them function as USER LED(s). I would describe 'trigger' as the API used to link a LED to an 'event' in kernel space. Here, 'event' could be microSD card or Ethernet activity, heartbeat, power etc. To understand this better, take LED D11 for example. The trigger for D11 has been set by default to heartbeat. So, to use it as an USER LED, we have to change the trigger for it to 'none' as shown in Figure - 5 below:
+This is an optional section which you can read for further understanding. In a nutshell, we are trying to access the on board USER LEDs via userspace[http://elinux.org/images/4/4f/02-linux-quick-start.pdf] in Linux. To be more precise, we are using the sysfs[http://www.makelinux.net/books/lkd2/ch17lev1sec8] interface. sysfs is a virtual filesystem which translates the hardware devices and busses attached to the system into a file system hierarchy that can be accessed from userspace. sysfs is generated by the kernel and is always mounted at /sys. As discussed earlier, the trigger for D11 and D12 LEDs has to be changed to make them function as USER LEDs. I would describe 'trigger' as the API used to link a LED to an 'event' in kernel space. Here, an 'event' could be microSD card or Ethernet activity, heartbeat, power etc. To understand this better, take LED D11 for example. The trigger for D11 has been set by default to heartbeat. So, to use it as an USER LED, we have to change the trigger for it to 'none' as shown in Figure - 5 below:
 
  Figure-5: Change LED Trigger
 
@@ -96,39 +110,41 @@ This is an optional section which you can read for further understanding. In a n
 
 Booting Angstrom
 
-• First insert the card into the microSD card slot as shown in Figure -6. 
+• First insert the card into the microSD card slot label side up as shown in Figure -6. 
 
  Figure-6: Connecting the microSD card
 
-• Next, connect an external keyboard and mouse to the MinnowBoard. Then connect the USB mini cable to your computer and the MinnowBoard as shown in Figure -7
+• Next, connect an external keyboard and mouse to the MinnowBoard. Then connect a USB mini cable to your computer and the MinnowBoard as shown in Figure -7. This connection will be used to access the serial console of the MinnowBoard.
 
- Figure-7: Connecting the USB mini cable
+ Figure-7: Connecting a USB mini cable for serial console access
 
-• To power up the MinnowBoard, connect the 5V/3A power supply rated to it as shown in Figure -8:
+• To power up the MinnowBoard, connect the 5V/3A power supply to it as shown in Figure -8:
+
+NOTE TO JAYNEIL: The RevA MinnowBoard I received just recently came with a 5V 2.5A power supply. Please check with David Anders whether the final boards will ship with a 3A or a 2.5A power supply and update this if needed.
 
  Figure-8: Powering up the MinnowBoard
 
-• Access the MinnowBoard via the terminal:$ screen /dev/ttyUSB1 115200Note:- You can also use minicom. But this is just much easier! Also in most cases the virtual USB serial port is ttyUSB1. If it does not work, try ttyUSB0 .
+• Access the MinnowBoard's serial console via a terminal emulator:$ screen /dev/ttyUSB0 115200 Note:- You can also use minicom, but screen is much easier to use! Also in most cases the virtual USB serial port is ttyUSB0. If it does not work, try ttyUSB1 .
 
-• You should see a similar Angstrom login in screen as shown in Figure - 9. The username is 'root' and there is no password. Just press the enter key.
+• You should see a similar Angstrom login screen as shown in Figure - 9. The username is 'root' and there is no password - just press the Enter key.
 
  Figure-9: Angstrom
 
 Steps
 
-• Now let us light that LED!
+• Now let us control that LED!
 
-To use D11 as USER LED, we need to change its default trigger. Write the following command in your terminal to accomplish it:
+To use D11 as a USER LED, we need to change its default trigger. Type the following command in your terminal to accomplish this:
 
 echo none > /sys/class/leds/minnow_led0/trigger
 
-Now we are ready to toggle the LED. Write the following commands in your terminal as shown in Figure - 10(First one is for turning ON and latter for OFF):
+Now we are ready to toggle the LED. Type the following commands in your terminal as shown in Figure - 10 (The first one is for turning the LED ON, and the second for turning it OFF):
 
 echo 1 > /sys/class/leds/minnow_led0/brightness
 
  Figure-10: Toggle the LED
 
-You should get an output as shown below:
+You should see the LED change state as shown below:
 
  Figure-11: Led ON
 
@@ -138,7 +154,7 @@ You should get an output as shown below:
 
 Windows Users
 
-This section is for those who are using a windows machine to interact with the MinnowBoard. 
+This section is for those who are using a Windows machine to interact with the MinnowBoard. 
 
 Serial Terminal
 
@@ -150,11 +166,11 @@ http://en.sourceforge.jp/projects/ttssh2/releases/
 
 At the time of writing this guide the latest version was 'teraterm-4.78.exe'
 
-• Install the Teraterm software by double clicking on the exe file downloaded earlier. If it displays a security warning, then accept it and click on 'Run' as shown in Figure - 13 below:
+• Install the Teraterm software by double clicking on the exe file downloaded earlier. If it displays a security warning, accept it and click on 'Run' as shown in Figure - 13 below:
 
  Figure-13: Teraterm installation
 
-• Then just follow the on-screen instructions to install the software. It is advised to do the 'full' installation instead of the 'standard' one as shown in Figure - 14 below:
+• Now just follow the on-screen instructions to install the software. It is advised to do the 'full' installation instead of the 'standard' one as shown in Figure - 14 below:
 
  Figure-14: Perform Teraterm full installation
 
@@ -172,11 +188,11 @@ At the time of writing this guide the latest version was 'teraterm-4.78.exe'
 
 Preparing the microSD Card
 
-• First, download the latest Angstrom from the link below:
+• First, download the latest Angstrom Linux image from the link below:
 
 http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz
 
-• Next, download 7-zip utility from the link below and install it:http://www.7-zip.org/download.html
+• Next, download the 7-zip utility from the link below and install it:http://www.7-zip.org/download.html
 
 • Decompress the previously downloaded Angstrom image using 7-zip as shown in Figure - 18 below. The resulting file should have an extension '.img' .
 
@@ -186,7 +202,7 @@ http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-ima
 
 http://sourceforge.net/projects/win32diskimager/files/latest/download 
 
-• Insert the mircoSD card into the computer using an appropriate connector. Next, launch the image writer software we just installed earlier. Select the Angstrom image and write it to the microSD card as shown in Figure - 19 below.
+• Insert the mircoSD card into the computer using an appropriate adapter. Next, launch the image writer software we just installed earlier. Select the Angstrom image and write it to the microSD card as shown in Figure - 19 below.
 
  Figure-19: Writing the image to microSD card
 
