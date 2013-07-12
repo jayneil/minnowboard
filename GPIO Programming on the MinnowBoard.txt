@@ -16,9 +16,9 @@ When you purchase a MinnowBoard, you get the following items in the box as shown
 
 1. MinnowBoard
 
-2. 5V Power Connector
+2. 5V Power Adapter
 
-3. 4GB microSD card preloaded with Angstrom Distribution(Yocto Project compatible)
+3. 4GB microSD card preloaded with the Angstrom Linux Distribution (Yocto Project Compatible)
 
  Figure-1: Box contents
 
@@ -26,7 +26,7 @@ When you purchase a MinnowBoard, you get the following items in the box as shown
 
 Specifications
 
-For detailed specifications of the MinnowBoard, please visit the link below:
+For detailed specifications of the MinnowBoard, please visit our web site:
 
 http://www.minnowboard.org/technical-features/
 
@@ -34,11 +34,11 @@ http://www.minnowboard.org/technical-features/
 
 Anatomy of a MinnowBoard
 
-This section briefly describes the various different components on the MinnowBoard. Figure -2 below annotates the different components on the top side of the MinnowBoard.
+This section outlines the various components on the MinnowBoard. Figure -2 below annotates the important components on the top side of the MinnowBoard.
 
  Figure-2: MinnowBoard top side
 
-Figure -3 below annotates the different components on the bottom side of the MinnowBoard.
+Figure -3 below annotates the important components on the bottom side of the MinnowBoard.
 
  Figure-3: MinnowBoard bottom side 
 
@@ -46,19 +46,21 @@ Figure -3 below annotates the different components on the bottom side of the Min
 
 Preparing the MicroSD Card
 
-Note:- This section is for linux users only. If you are using Windows, please skip to the [sec:Windows-Users]
+Please note that this section is completely optional. The MinnowBoard already comes with a microSD card that is preloaded with a working Angstrom Linux image. In case you to use a newer image or want to program the microSD card from scratch, this section covers it all. These steps were created using an Ubuntu 12.10 64-bit system.
 
-Please note that this section is completely optional. The MinnowBoard already comes with a microSD card that is preloaded with a working Angstrom image. In any case should you want a newer image or want to program the microSD card again, this section covers it all. For the purpose of this guide, I have used an Ubuntu 12.10 64 bit system.
+Note:- This section is for linux users only. If you are using Windows, please skip ahead to the [sec:Windows-Users] section.
 
-• First download the latest Angstrom image for MinnowBoard from the link below:
+• First download the latest Angstrom Linux image for MinnowBoard from the link below:
 
 http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz
 
 At the time of writing this guide, the latest image available for download was 'Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz' 
 
-• Now, identify the correct raw device name (like /dev/sde - not /dev/sde1) for the microSD card. You can do this by opening disk utility in Ubuntu and clicking on the microSD card.
+• Now, identify the correct raw device name (like /dev/sde - not /dev/sde1) for your microSD card. You can do this by opening the Disk Utility application (sometimes also called Disks) in Ubuntu and clicking on the microSD card entry. See the Device field to determine the raw device name of your microSD card.
 
-• Now unpack the image to the microSD card by writing the commands below in the terminal. 
+NOTE TO JAYNEIL: Add filesystem unmounting instructions here
+
+• Now unpack the image to the microSD card by typing the following commands in a terminal window: 
 
 $ xzcat Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz | sudo dcfldd of=/dev/sdc
 
@@ -120,21 +122,23 @@ https://www.sparkfun.com/products/9140
 
 Booting Angstrom
 
-• First insert the card into the microSD card slot as shown in Figure -7. 
+• First insert the card into the microSD card slot label side up as shown in Figure -7. 
 
  Figure-7: Connecting the microSD card
 
-• Next, connect an external keyboard and mouse to the MinnowBoard. Then connect the USB mini cable to your computer and the MinnowBoard as shown in Figure -8
+• Next, connect an external keyboard and mouse to the MinnowBoard. Then connect a USB mini cable to your computer and the MinnowBoard as shown in Figure -8. This connection will be used to access the serial console of the MinnowBoard.
 
- Figure-8: Connecting the USB mini cable
+ Figure-8: Connecting a USB mini cable for serial console access
 
-• To power up the MinnowBoard, connect the 5V/3A power supply rated to it as shown in Figure -9:
+• To power up the MinnowBoard, connect the 5V/3A power supply as shown in Figure -9:
+
+NOTE TO JAYNEIL: Confirm power supply amperage
 
  Figure-9: Powering up the MinnowBoard
 
-• Access the MinnowBoard via the terminal:$ screen /dev/ttyUSB1 115200Note:- You can also use minicom. But this is just much easier! Also in most cases the virtual USB serial port is ttyUSB1. If it does not work, try ttyUSB0 .
+• Access the MinnowBoard's serial console via a terminal emulator:$ screen /dev/ttyUSB0 115200Note:- You can also use minicom, but screen is much easier to use! Also in most cases the virtual USB serial port is ttyUSB0. If it does not work, try ttyUSB1.
 
-• You should see a similar Angstrom login in screen as shown in Figure - 10. The username is 'root' and there is no password. Just press the enter key.
+• You should see a similar Angstrom login screen as shown in Figure - 10. The username is 'root' and there is no password - just press the Enter key.
 
  Figure-10: Angstrom
 
@@ -164,7 +168,7 @@ You should get an output as shown below:
 
 Windows Users
 
-This section is for those who are using a windows machine to interact with the MinnowBoard. 
+This section is for those who are using a Windows machine to interact with the MinnowBoard. 
 
 Serial Terminal
 
@@ -176,11 +180,11 @@ http://en.sourceforge.jp/projects/ttssh2/releases/
 
 At the time of writing this guide the latest version was 'teraterm-4.78.exe'
 
-• Install the Teraterm software by double clicking on the exe file downloaded earlier. If it displays a security warning, then accept it and click on 'Run' as shown in Figure - 14 below:
+• Install the Teraterm software by double clicking on the exe file downloaded earlier. If it displays a security warning, accept it and click on 'Run' as shown in Figure - 14 below:
 
  Figure-14: Teraterm installation
 
-• Then just follow the on-screen instructions to install the software. It is advised to do the 'full' installation instead of the 'standard' one as shown in Figure - 15 below:
+• Now just follow the on-screen instructions to install the software. It is advised to do the 'full' installation instead of the 'standard' one as shown in Figure - 15 below:
 
  Figure-15: Perform Teraterm full installation
 
@@ -198,11 +202,11 @@ At the time of writing this guide the latest version was 'teraterm-4.78.exe'
 
 Preparing the microSD card
 
-• First, download the latest Angstrom from the link below:
+• First, download the latest Angstrom Linux image from the link below:
 
 http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz
 
-• Next, download 7-zip utility from the link below and install it:
+• Next, download the 7-zip utility from the link below and install it:
 
 http://www.7-zip.org/download.html
 
@@ -214,7 +218,7 @@ http://www.7-zip.org/download.html
 
 http://sourceforge.net/projects/win32diskimager/files/latest/download 
 
-• Insert the microSD card into the computer using an appropriate connector. Next, launch the image writer software we just installed earlier. Select the Angstrom image and write it to the microSD card as shown in Figure - 20 below.
+• Insert the microSD card into the computer using an appropriate adapter. Next, launch the image writer software we just installed earlier. Select the Angstrom image and write it to the microSD card as shown in Figure - 20 below.
 
  Figure-20: Writing the image to microSD card
 
