@@ -1,0 +1,1334 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout LyX-Code
+     
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Graphics/Assets/minnow_assets/Logo/OS_64_Yocot-Q4-Assets_MinnowBoard_Logo_Final-CompassFont.tif
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\shape italic
+\begin_inset VSpace defskip
+\end_inset
+
+
+\shape default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Graphics/Assets/minnow_assets/Board_Photos/MinnowX3-Top.png
+	lyxscale 40
+	scale 12
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+\begin_inset Graphics
+	filename /home/jayneil/Work/Beaglebone/Pics/CC Logo.jpg
+	scale 65
+	rotateOrigin leftBottom
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+MinnowBoard Guide: Getting Started
+\end_layout
+
+\begin_layout Author
+Jayneil Dalal(jayneil.dalal@gmail.com)
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 5.3cm
+\end_inset
+
+
+\series bold
+Summary
+\end_layout
+
+\begin_layout Standard
+In this guide, we will examine the various features of the MinnowBoard and
+ boot the Angstrom embedded Linux distribution.
+ This guide is for new users who are just getting started with the MinnowBoard.
+ 
+\end_layout
+
+\begin_layout Section*
+\noindent
+Contents of the box
+\end_layout
+
+\begin_layout Standard
+\noindent
+When you purchase a MinnowBoard, the following items are included in the
+ box as shown in Figure -1:
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+MinnowBoard
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+5V Power Adaptor
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+4GB micro SD card preloaded with Angstrom Linux Distribution(Yocto Project
+ Compatible) 
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\noindent
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Source/Pics/2013-05-30_08-36-25_341.jpg
+	lyxscale 20
+	scale 9
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\noindent
+Figure-1: Box contents
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Anatomy of a MinnowBoard
+\end_layout
+
+\begin_layout Standard
+This section outlines the various components on the MinnowBoard.
+ Figure -2 below annotates the important components on the top side of the
+ MinnowBoard.
+ 
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Graphics/Minnowboard_front_specs.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 60bp
+\end_inset
+
+Figure-2: 
+\shape italic
+MinnowBoard top side
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure -3 below annotates the important components on the bottom side of
+ the MinnowBoard.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Graphics/Minnowboard_back_specs.png
+	lyxscale 50
+	scale 29
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 60bp
+\end_inset
+
+Figure-3: 
+\shape italic
+MinnowBoard bottom side 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Specifications
+\end_layout
+
+\begin_layout Standard
+For detailed specifications of the MinnowBoard, please visit our website
+ below:
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.minnowboard.org/technical-features/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section*
+Preparing the MicroSD Card
+\end_layout
+
+\begin_layout Standard
+Please note that this section is completely optional.
+ The MinnowBoard already comes with a microSD card that is preloaded with
+ a working Angstrom Linux image.
+ In case you want to use a newer image or want to program the microSD from
+ scratch, this section covers it all.
+ These steps were created using an Ubuntu 12.10 64-bit system.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+Note:-
+\shape default
+ This section is for Linux users only.
+ If you are using Windows, please skip to the 
+\begin_inset CommandInset ref
+LatexCommand nameref
+reference "sec:Windows-Users"
+
+\end_inset
+
+ 
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+First download the latest Angstrom Linux image for MinnowBoard using the
+ following link:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "   http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+At the time of writing this guide, the latest image available for download
+ was 'Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz'
+ 
+\end_layout
+
+\begin_layout Itemize
+Now, identify the disk device filename for your microSD card.
+ You can do this by opening the Disk Utility application (sometimes also
+ called Disks) in Ubuntu and clicking on the microSD card entry.
+ See the Device field to determine the raw device name of your microSD card.
+ Note that this device name should specify an entire disk device (e.g, /dev/sde),
+ and not an individual disk partition (e.g, /dev/sde1)
+\end_layout
+
+\begin_layout Itemize
+Now, unmount the microSD card by typing the command below in the terminal.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\shape italic
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+$ sudo umount /dev/sdX?* 
+\end_layout
+
+\end_inset
+
+
+\shape default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+Here 'sdX' stands for the raw device id of the microSD card.
+\end_layout
+
+\begin_layout Itemize
+Now unpack the image to the microSD card by typing the commands below in
+ a terminal window: 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\shape italic
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+$ xzcat Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.05.24.img.xz
+ | sudo dcfldd of=/dev/sdX
+\end_layout
+
+\end_inset
+
+
+\shape default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Booting Angstrom
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+First insert the card into the microSD card slot label side up as shown
+ in Figure -4.
+ 
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Source/Pics/2013-05-30_08-39-22_260.jpg
+	lyxscale 10
+	scale 9
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 60bp
+\end_inset
+
+Figure-4: Connecting the micro SD card
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+Next, connect an external keyboard and mouse to the MinnowBoard.
+ Then connect a USB mini cable to your computer and the MinnowBoard as shown
+ in Figure -5.
+ This connection will be used to access the serial console of the MinnowBoard.
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Downloads/2013-06-19_19-11-14_816.jpg
+	lyxscale 10
+	scale 9
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 60bp
+\end_inset
+
+Figure-5: Connecting a USB mini cable for serial console access
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+Now power up the MinnowBoard, connect the 5V/2.5A power supply to it as shown
+ in Figure -6:
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Source/Pics/2013-05-30_08-39-49_905.jpg
+	lyxscale 10
+	scale 7
+	rotateAngle 270
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 40bp
+\end_inset
+
+Figure-6: Powering up the MinnowBoard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+Access the MinnowBoard's serial console via a terminal emulator:
+\size default
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\shape italic
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+$ screen /dev/ttyUSB0 115200
+\end_layout
+
+\end_inset
+
+
+\shape default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\shape italic
+Note:- 
+\shape default
+You can also use minicom, but screen is much easier to use! Also in most
+ cases the virtual USB serial port is ttyUSB0.
+ If it does not work, try ttyUSB1
+\shape italic
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+You should see a similar Angstrom login screen as shown in Figure - 7.
+ The username is 'root' and there is no password - just press the Enter
+ key.
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Toggling LED on MinnowBoard/Pics/Angstrom_login.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 40bp
+\end_inset
+
+Figure-7: Angstrom
+\end_layout
+
+\begin_layout Itemize
+
+\size large
+If you have an external display connected to the MinnowBoard via the HDMI
+ port, you should see output similar to that shown below in Figure - 8 
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename Pics/2013-05-28_19-01-31_508.jpg
+	lyxscale 20
+	scale 10
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 40bp
+\end_inset
+
+Figure-8: Angstrom
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size largest
+Figures - 9,10 show my setup.
+\size default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Pics/2013-05-28_19-01-22_315.jpg
+	lyxscale 20
+	scale 12
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 40bp
+\end_inset
+
+
+\series bold
+Figure-9:
+\series default
+ My Setup
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Pics/2013-05-28_19-02-26_916.jpg
+	lyxscale 20
+	scale 12
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 40bp
+\end_inset
+
+Figure-10: My Setup
+\end_layout
+
+\begin_layout Description
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Windows-Users"
+
+\end_inset
+
+Windows Section
+\end_layout
+
+\begin_layout Standard
+This section is for those who are using a Windows machine to interact with
+ the MinnowBoard.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Serial Terminal
+\end_layout
+
+\begin_layout Standard
+We will be using Teraterm as our terminal application.
+ Please follow the steps below to set up Teraterm:
+\end_layout
+
+\begin_layout Itemize
+Download the latest version of Teraterm using the link below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://en.sourceforge.jp/projects/ttssh2/releases/
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+At the time of writing this guide, the latest version was 'teraterm-4.78.exe'
+\end_layout
+
+\begin_layout Itemize
+Install the Teraterm software by double clicking on the exe file downloaded
+ earlier.
+ If it displays a security warning, accept it and click on 'Run' as shown
+ in Figure - 11 below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/1.PNG
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-11: Teraterm installation
+\end_layout
+
+\begin_layout Itemize
+Now just follow the on-screen instructions to install the software.
+ It is advised to do the 'full' installation instead of the 'standard' one
+ as shown in Figure - 12 below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/2.PNG
+	scale 43
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-12: Perform Teraterm full installation
+\end_layout
+
+\begin_layout Itemize
+Launch Teraterm.
+ Then go to Setup>Serial port and change the settings as shown in Figure
+ - 13 below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/4.PNG
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-13: Teraterm Serial Port setup
+\end_layout
+
+\begin_layout Itemize
+Then go to File>New connections and select the Serial option and chose the
+ appropriate COM port as shown in Figure - 14 below
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/6.PNG
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-14: Setting up a new connection
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Then connect the required accessories as described earlier in this guide
+ and power up the MinnowBoard.
+ If all went well, you should see a login screen in Teraterm as shown in
+ Figure - 15 below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/7.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-15: Angstrom login
+\end_layout
+
+\begin_layout Subsection*
+Preparing the microSD card
+\end_layout
+
+\begin_layout Itemize
+First, download the latest Angstrom Linux image from the link below:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "   http://dominion.thruhere.net/koen/angstrom/minnow/Angstrom-development-GNOME-image-eglibc-ipk-v2012.12-minnow-2013.06.04.img.xz"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Next, download the 7-zip utility from the link below and install it:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.7-zip.org/download.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Decompress the previously downloaded Angstrom image using 7-zip as shown
+ in Figure - 16 below.
+ The resulting file should have an extension '.img' .
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/Capture1.PNG
+	lyxscale 50
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-16: Decompressing the image
+\end_layout
+
+\begin_layout Itemize
+Image Writer for Windows is needed to write the .img file to a microSD card.
+ Download and install Image Writer using the link below: :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://sourceforge.net/projects/win32diskimager/files/latest/download 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Insert the mircoSD card into the computer using an appropriate adapter.
+ Next, launch the image writer software we just installed earlier.
+ Select the Angstrom image and write it to the microSD card as shown in
+ Figure - 17 below.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/jayneil/Work/Intel/Minnowboard/Guides/Physical Computing With MinnowBoard/Pics/Capture2.PNG
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset space \hspace{}
+\length 25bp
+\end_inset
+
+Figure-17: Writing the image to microSD card
+\end_layout
+
+\begin_layout Section*
+Resources
+\end_layout
+
+\begin_layout Itemize
+Please refer the websites below for more videos, tutorials, and projects
+ you can do with your MinnowBoard:
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.minnowboard.org/
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.elinux.org/Minnowboard
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.angstrom-distribution.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
